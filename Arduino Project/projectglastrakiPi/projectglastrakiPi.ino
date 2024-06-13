@@ -180,25 +180,27 @@ void setLeds(String message){
     if(getNextNumber(message, textCursor) == "1")
     {
       autom = true;
+      Serial.println("autom");
     }
     else
     {
       autom = false;
+      Serial.println("not autom");
     }
   }
   else {
     colsOk = false;
-    if (colsOk) {
-      dothecolors(colors);
-    }
   }
+  if (colsOk) {
+    dothecolors(colors);
+  } 
 }
 
 void dothecolors(String colors[])
 {
-  Serial.println("red = " + colors[0]);
-  Serial.println("yellow = " + colors[1]);
-  Serial.println("green = " + colors[2]);
+  //Serial.println("red = " + colors[0]);
+  //Serial.println("yellow = " + colors[1]);
+  //Serial.println("green = " + colors[2]);
   for(int i =0;i<3;i++){
     analogWrite(LEDs[i],(colors[i].toInt()));
    }
