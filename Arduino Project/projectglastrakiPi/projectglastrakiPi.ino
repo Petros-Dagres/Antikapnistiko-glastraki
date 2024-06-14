@@ -25,7 +25,7 @@ void setup() {
 const char START_TOKEN = '?';
 const char END_TOKEN = ';';
 const char DELIMIT_TOKEN = '&';
-const int CHAR_TIMEOUT = 20;
+const int CHAR_TIMEOUT = 25;
 
 bool waitingForStartToken = true;
 String messageBuffer = "";
@@ -141,7 +141,7 @@ void setLeds(String message){
 
   /*
    * message should be in the format
-   * r=xxx&y=xxx&g=xxx&a=x
+   * r=xxx&y=xxx&g=xxx&l=xxx&a=x
    */
   
   if (message.startsWith("r=")){
@@ -169,6 +169,17 @@ void setLeds(String message){
     textCursor = 2;
     colors[2] = getNextNumber(message, textCursor);
     textCursor += colors[2].length() + 1;
+    message=message.substring(textCursor);
+  }
+  else {
+    colsOk = false;
+  }
+    if (message.startsWith("l=")){
+    // correct starting message
+    textCursor = 2;
+    String num = getNextNumber(message, textCursor);
+    limit = num.toInt();
+    textCursor += num.length() + 1;
     message=message.substring(textCursor);
   }
   else {

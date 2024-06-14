@@ -38,8 +38,8 @@ public class ControlerScript : MonoBehaviour
         LanguageSelection(0);
         requestPermissionScript.AskForPermissionsNEI();
         editing = false;
-        AndroidNotificationChannel channel = new() 
-        { 
+        AndroidNotificationChannel channel = new()
+        {
             Id = "channel1",
             Name = "Default Channel",
             Importance = Importance.High,
@@ -65,12 +65,12 @@ public class ControlerScript : MonoBehaviour
     }
     public void DeleteButtonPress()
     {
-        if (SelectedGO != null && SelectedGO != daImage) 
+        if (SelectedGO != null && SelectedGO != daImage)
         {
-        int num = SelectedGO.GetComponent<Glastraki>().num;
-        Destroy(SelectedGO);
-        bluetoothController.CloseConnection(num);
-        bluetoothController.Toast("G" + num + " has been Deleted");
+            int num = SelectedGO.GetComponent<Glastraki>().num;
+            Destroy(SelectedGO);
+            bluetoothController.CloseConnection(num);
+            bluetoothController.Toast("G" + num + " has been Deleted");
         }
         editing = true;
         TheothereditButtonPress();
@@ -200,7 +200,16 @@ public class ControlerScript : MonoBehaviour
         if (SelectedGO != null && SelectedGO != daImage)
         {
             SelectedGO.GetComponent<Glastraki>().limit = int.Parse(theval);
+            bluetoothController.SendData("?r=0&y=0&g=0&l=" + theval + "&a=" + IsAuto(SelectedGO.GetComponent<Glastraki>().auto) + ";", SelectedGO.GetComponent<Glastraki>().num);
         }
+    }
+
+    private int IsAuto(bool theval)
+    {
+        if (theval)
+            return 1;
+        else 
+            return 0;
     }
 
     public void WhenAutoToglePressed(bool auto)
@@ -209,9 +218,9 @@ public class ControlerScript : MonoBehaviour
         {
             SelectedGO.GetComponent<Glastraki>().auto = auto;
             if (auto)
-                bluetoothController.SendData("?r=0&y=0&g=0&a=1;", SelectedGO.GetComponent<Glastraki>().num);
+                bluetoothController.SendData("?r=0&y=0&g=0&l="+ SelectedGO.GetComponent<Glastraki>().limit + "&a=1;", SelectedGO.GetComponent<Glastraki>().num);
             else
-                bluetoothController.SendData("?r=0&y=0&g=0&a=0;", SelectedGO.GetComponent<Glastraki>().num);
+                bluetoothController.SendData("?r=0&y=0&g=0&l="+ SelectedGO.GetComponent<Glastraki>().limit + "&a=0;", SelectedGO.GetComponent<Glastraki>().num);
         }
     }
 

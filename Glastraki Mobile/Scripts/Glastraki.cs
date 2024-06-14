@@ -78,14 +78,14 @@ public class Glastraki : MonoBehaviour
         num *= 2;
         if (numm <= 255)
         {
-            msgforpi = "?r=" + 0 + "&y=" + numm + "&g=" + (255 - numm) + "&a=0;";
+            msgforpi = "?r=" + 0 + "&y=" + numm + "&g=" + (255 - numm) +"&l=" + limit + "&a=0;";
             thecolor.color = new(num, 1, 0);
         }
         else 
         {
             numm -= 255;
             num -= 1;
-            msgforpi = "?r=" + numm + "&y=" + (255 - numm) + "&g=" + 0 + "&a=0;";
+            msgforpi = "?r=" + numm + "&y=" + (255 - numm) + "&g=" + 0 + "&l=" + limit + "&a=0;";
             thecolor.color = new(255, 1 - num, 0);
         }
         
