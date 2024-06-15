@@ -14,6 +14,7 @@ public class ControlerScript : MonoBehaviour
 {
     public RequestPermissionScript requestPermissionScript;
     public BluetoothController bluetoothController;
+    private IDataService dataService = new JsonDataService();
     public GameObject ScrollV;
     public TMP_Dropdown dropdown;
     public string[] yourdivicesAdress = { "", "", "", "", "", "", "", "", "" };
@@ -77,7 +78,7 @@ public class ControlerScript : MonoBehaviour
     }
     public void SaveButtonPress()
     {
-        bluetoothController.Toast("Hi!");
+
     }
     public void ExitButtonPress()
     {
